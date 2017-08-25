@@ -25,3 +25,21 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    supportLibraryVersion = '26.0.1'
+    constraintLayoutVersion = '1.0.2'
+
+    kotlinVersion = '1.1.4-2'
+    rxJavaVersion = '2.1.2'
+    rxKotlinVersion = '2.0.3'
+    rxAndroidVersion = '2.0.1'
+    rxBindingVersion = '2.0.0'
+
+    paperParcelVersion = '2.0.2'
+
+    retrofitVersion = '2.3.0'
+    okhttpVersion = '3.7.0'
+
+    junitVersion = '4.12'
+}

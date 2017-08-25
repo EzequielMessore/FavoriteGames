@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -24,11 +23,30 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.0.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.0'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+
+    //region Support
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    compile "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    //endregion
+
+    //region Parcel with Kotlin
+    compile "nz.bradcampbell:paperparcel:$paperParcelVersion"
+    compile "nz.bradcampbell:paperparcel-kotlin:$paperParcelVersion"
+    kapt "nz.bradcampbell:paperparcel-compiler:$paperParcelVersion"
+    //endregion
+
+    //region network
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    //endregion
+
+    //region Test
+    testCompile "junit:junit:$junitVersion"
+    //endregion
 }
