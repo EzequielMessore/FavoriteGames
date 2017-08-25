@@ -33,6 +33,12 @@ dependencies {
     compile "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
     //endregion
 
+    //region Rx2
+    compile "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    compile "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    //endregion
+
     //region Parcel with Kotlin
     compile "nz.bradcampbell:paperparcel:$paperParcelVersion"
     compile "nz.bradcampbell:paperparcel-kotlin:$paperParcelVersion"
