@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Jogos Favoritos</string>
+    <string name="title_games_activity">Lista de Jogos</string>
+    <string name="msg_error_loading">Erro ao buscar os dados</string>
 </resources>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Favorite Games</string>
+    <string name="title_games_activity">Games List</string>
+    <string name="msg_error_loading">Error to loading data</string>
 </resources>

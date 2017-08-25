@@ -1,5 +1,7 @@
 package br.com.tokenlab.favoritegames.features.base.presenter
 
+import br.com.tokenlab.favoritegames.features.base.view.BaseView
+import br.com.tokenlab.favoritegames.features.base.view.LoadingView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -13,7 +15,7 @@ import java.lang.ref.WeakReference
  * Created by ezequiel.messore on 25/ago/2017.
  * ezequiel.messore@guaranisistemas.com.br
  */
-open class BasePresenterImpl <View> : BasePresenter<View> {
+open class BasePresenterImpl<View> : BasePresenter<View> {
 
     private var viewReference: WeakReference<View>? = null
     private var disposables: CompositeDisposable? = null
@@ -37,12 +39,33 @@ open class BasePresenterImpl <View> : BasePresenter<View> {
 
     //region functions
 
-    fun <T> exec(observable: Observable<T>, disposable: DisposableObserver<T>): Observable<T> {
-        observable.subscribeOn(Schedulers.io())
+    fun <T> execWithView(observable: Observable<T>, disposable: DisposableObserver<T>): Observable<T> {
+        toggleLoading(true)
+        observable
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(
+                        { toggleLoading(false) }
+                )
+                .doOnError({ error ->
+                    toggleLoading(false)
+                    if (view is BaseView) {
+                        (view as BaseView).showError(error)
+                    }
+                })
                 .subscribeWith(disposable)
         addDisposable(disposable)
         return observable
+    }
+
+    private fun toggleLoading(visible: Boolean) {
+        if (view is LoadingView) {
+            if (visible) {
+                (view as LoadingView).showLoading()
+            } else {
+                (view as LoadingView).hideLoading()
+            }
+        }
     }
 
     private fun addDisposable(disposable: Disposable) {

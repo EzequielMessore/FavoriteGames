@@ -20,7 +20,7 @@ object ServiceGenerator {
 
     init {
         val gson = GsonBuilder()
-                .setDateFormat("dd/MM/YYYY")
+                .setDateFormat("dd/MM/yyyy")
                 .create()
 
         val builder = OkHttpClient.Builder()

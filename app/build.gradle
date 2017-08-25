@@ -55,4 +55,8 @@ dependencies {
     //region Test
     testCompile "junit:junit:$junitVersion"
     //endregion
+
+    //region Loading Image
+    compile 'com.facebook.fresco:fresco:1.5.0'
+    //endregion
 }
