@@ -1,7 +1,8 @@
-package br.com.tokenlab.favoritegames
+package br.com.tokenlab.favoritegames.features
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import br.com.tokenlab.favoritegames.R
 
 class MainActivity : AppCompatActivity() {
 
