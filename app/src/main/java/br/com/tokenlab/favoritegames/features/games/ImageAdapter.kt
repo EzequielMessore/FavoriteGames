@@ -34,14 +34,8 @@ class ImageAdapter(val context: Context) : RecyclerView.Adapter<ImageAdapter.Ima
         return ImageViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ImageViewHolder?, position: Int) {
-        //todo treatment done because the fifa game platforms are incorrect
-        try {
-            holder?.bind(getItem(position))
-        } catch (error: Exception) {
-            holder?.hideImagePlatform()
-            Log.e(simpleName, error.message)
-        }
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
     override fun getItemCount() = items!!.size
@@ -51,9 +45,6 @@ class ImageAdapter(val context: Context) : RecyclerView.Adapter<ImageAdapter.Ima
     inner class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(platform: Platform) {
             itemView.iv_platform.setImageDrawable(ContextCompat.getDrawable(context, platform.getMipmap()))
-        }
-        fun hideImagePlatform(){
-            itemView.iv_platform.visibility = View.GONE
         }
     }
 }

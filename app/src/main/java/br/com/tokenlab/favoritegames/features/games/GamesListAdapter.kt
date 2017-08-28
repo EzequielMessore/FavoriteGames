@@ -51,16 +51,8 @@ class GamesListAdapter(val listener: OnGameClickListener) : RecyclerView.Adapter
 
             itemView.iv_play.setOnClickListener({ listener.onClickPlay(game.trailer) })
 
-            //todo treatment done because the FIFA game platforms are incorrect
-            var sorted = game.platforms
-            try {
-                sorted = game.platforms.sorted()
-            } catch (error: Exception) {
-                Log.e(GamesListAdapter::class.java.simpleName, error.message)
-            }
-
             val adapter = ImageAdapter(listener.getContext())
-            adapter.items = sorted
+            adapter.items = game.platforms.sorted()
             itemView.recyclerView.adapter = adapter
         }
 
