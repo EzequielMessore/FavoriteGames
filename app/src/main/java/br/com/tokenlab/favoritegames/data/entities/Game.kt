@@ -16,7 +16,7 @@ import java.util.*
         @SerializedName("release_date")
         val releaseDate: Date,
         val trailer: String,
-        val platforms: List<String>
+        val platforms: List<Platform>
 ) : PaperParcelable {
     companion object {
         @JvmField val CREATOR = PaperParcelGame.CREATOR

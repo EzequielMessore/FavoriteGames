@@ -1,18 +1,21 @@
 package br.com.tokenlab.favoritegames.features.games
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.tokenlab.favoritegames.R
 import br.com.tokenlab.favoritegames.data.entities.Game
+import br.com.tokenlab.favoritegames.utils.AppUtil
 import kotlinx.android.synthetic.main.item_game.view.*
 
 /**
  * Created by ezequiel.messore on 25/ago/2017.
  * ezequiel.messore@guaranisistemas.com.br
  */
-class GamesListAdapter (val listener: OnGameClickListener) : RecyclerView.Adapter<GamesListAdapter.GamesViewHolder>() {
+class GamesListAdapter(val listener: OnGameClickListener) : RecyclerView.Adapter<GamesListAdapter.GamesViewHolder>() {
 
     private val itemsList = ArrayList<Game>()
 
@@ -40,16 +43,31 @@ class GamesListAdapter (val listener: OnGameClickListener) : RecyclerView.Adapte
 
     inner class GamesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(game: Game) {
-            itemView.setOnClickListener { listener.onClick(game) }
             itemView.tv_name.text = game.name
+            itemView.tv_date.text = AppUtil.formatDate(game.releaseDate)
+
             itemView.sm.setImageURI(null as String?)
             itemView.sm.setImageURI(game.image)
 
+            itemView.iv_play.setOnClickListener({ listener.onClickPlay(game.trailer) })
+
+            //todo treatment done because the FIFA game platforms are incorrect
+            var sorted = game.platforms
+            try {
+                sorted = game.platforms.sorted()
+            } catch (error: Exception) {
+                Log.e(GamesListAdapter::class.java.simpleName, error.message)
+            }
+
+            val adapter = ImageAdapter(listener.getContext())
+            adapter.items = sorted
+            itemView.recyclerView.adapter = adapter
         }
 
     }
 
     interface OnGameClickListener {
-        fun onClick(games: Game)
+        fun onClickPlay(url: String)
+        fun getContext(): Context
     }
 }

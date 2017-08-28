@@ -1,20 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="FIFA 18" />
+    android:layout_height="130dp"
+    android:layout_margin="8dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sm"
         android:layout_width="100dp"
-        android:layout_height="140dp"
-        android:layout_margin="8dp"
-        android:background="?attr/selectableItemBackground" />
-</LinearLayout>
+        android:layout_height="120dp"
+        android:adjustViewBounds="true"
+        app:actualImageScaleType="fitCenter" />
+
+    <LinearLayout
+        android:id="@+id/ll_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@id/sm"
+        android:layout_toStartOf="@id/iv_play"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            tools:text="The Elder Scrolls V: Skyrim" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="29/09/2017" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_play"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/contentDescription"
+        android:src="@mipmap/ic_play" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/sm"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@id/sm"
+        android:orientation="horizontal"
+        app:layoutManager="LinearLayoutManager" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorTextPrimary" />
+</RelativeLayout>

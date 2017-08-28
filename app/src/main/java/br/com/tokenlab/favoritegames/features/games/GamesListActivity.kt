@@ -2,6 +2,7 @@ package br.com.tokenlab.favoritegames.features.games
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import br.com.tokenlab.favoritegames.R
@@ -52,8 +53,12 @@ class GamesListActivity : BaseActivity(), GamesContract.View, ViewPresenter<Game
         super.setUp(savedInstanceState)
         presenter = GamesPresenter(GamesModelImpl())
         val listener = object : GamesListAdapter.OnGameClickListener {
-            override fun onClick(games: Game) {
-                Toast.makeText(this@GamesListActivity, "", Toast.LENGTH_LONG).show()
+            override fun onClickPlay(url: String) {
+                watchTrailer(url)
+            }
+
+            override fun getContext(): Context {
+                return this@GamesListActivity
             }
         }
         adapter = GamesListAdapter(listener)
@@ -76,10 +81,17 @@ class GamesListActivity : BaseActivity(), GamesContract.View, ViewPresenter<Game
     }
     //endregion
 
+    //region Other Methods
+    private fun watchTrailer(trailer: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(trailer))
+        startActivity(intent)
+    }
+    //endregion
+
     //static method
     companion object {
         fun getIntent(context: Context): Intent
-                = AppUtil.startActivityAndFinishPrevious(context,GamesListActivity::class.java)
+                = AppUtil.startActivityAndFinishPrevious(context, GamesListActivity::class.java)
     }
 
 }
