@@ -4,4 +4,4 @@
     android:layout_height="match_parent"
     android:scaleType="centerCrop"
     android:orientation="vertical"
-    android:src="@drawable/ic_bac" />
+    android:src="@drawable/splash" />
